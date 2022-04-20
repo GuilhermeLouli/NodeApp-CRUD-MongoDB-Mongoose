@@ -1,8 +1,15 @@
-const Sequelize = require("sequelize").Sequelize //this is the import
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-const sequelize = new Sequelize('nodeapp', 'root', '1234567', { //this is the object
-  dialect: 'mysql',
-  host: 'localhost'
-});
+const mongoConnect = callback => {
+  MongoClient.connect(
+    'mongodb+srv://Louli:DgAJS9BpmTjFHkVl@cluster0.3f6kq.mongodb.net/loulibase?retryWrites=true&w=majority'
+  )
+    .then(client => {
+      console.log('Connected');
+      callback(client);
+    })
+    .catch(err => console.log(err));
+}
 
-module.exports = sequelize;
+module.exports = mongoConnect;
